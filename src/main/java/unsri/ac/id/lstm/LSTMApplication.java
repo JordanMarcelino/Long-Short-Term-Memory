@@ -1,6 +1,6 @@
 package unsri.ac.id.lstm;
 
-public class LstmApplication {
+public class LSTMApplication {
 
     public static void main(String[] args) {
 
