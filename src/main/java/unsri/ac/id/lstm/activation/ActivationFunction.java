@@ -1,7 +1,5 @@
 package unsri.ac.id.lstm.activation;
 
-public enum ActivationFunction {
-    RELU,
-    SIGMOID,
-    TANH
+public interface ActivationFunction {
+    double[] activate(double[] input);
 }
