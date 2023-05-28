@@ -96,4 +96,6 @@ public class ActivationFunctionTest {
             compare(expectedResult[i], realResult[i]);
         }
     }
+
+
 }
