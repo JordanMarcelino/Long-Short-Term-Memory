@@ -7,12 +7,12 @@ import java.util.Random;
 @Getter
 public class Dataset {
     private double[][] X;
-    private int[] Y;
+    private double[] Y;
     private final Random random = new Random();
 
     public void createSpiralData(int points, int classes) {
         X = new double[points * classes][2];
-        Y = new int[points * classes];
+        Y = new double[points * classes];
         int ix = 0;
         for (int classNumber = 0; classNumber < classes; classNumber++) {
             double r = 0;

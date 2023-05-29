@@ -3,7 +3,7 @@ package unsri.ac.id.lstm;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import unsri.ac.id.lstm.activation.ReLU;
+import unsri.ac.id.lstm.activation.*;
 import unsri.ac.id.lstm.dataset.Dataset;
 import unsri.ac.id.lstm.layers.Dense;
 
@@ -22,10 +22,14 @@ public class LayerTest {
 
     @Test
     void testDense() {
-        Dense dense = new Dense(dataset.getX()[0].length, 16, new ReLU());
-        dense.forward(dataset.getX());
-        System.out.println(Arrays.deepToString(dense.getOutput()));
-        System.out.println(dense.getOutput().length);
-        System.out.println(dense.getOutput()[0].length);
+        double[] input = Arrays.stream(dataset.getX()).flatMapToDouble(Arrays::stream).toArray();
+        System.out.println(Arrays.toString(input));
+
+        Dense dense = new Dense(input.length, 4, new SoftMax());
+
+        dense.forward(input);
+
+        System.out.println(Arrays.toString(dense.getOutput()));
+        System.out.println(Arrays.stream(dense.getOutput()).sum());
     }
 }

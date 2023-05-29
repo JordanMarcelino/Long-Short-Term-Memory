@@ -5,6 +5,12 @@ import unsri.ac.id.lstm.layers.Layer;
 public interface Model {
     void add(Layer... layers);
 
+    void forward();
+
+    void backPropagation();
+
+    void updateMiniBatch();
+
     void summary();
 
     void compile();

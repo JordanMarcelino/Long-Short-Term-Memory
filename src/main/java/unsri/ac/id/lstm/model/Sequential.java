@@ -20,6 +20,21 @@ public class Sequential implements Model {
     }
 
     @Override
+    public void forward() {
+
+    }
+
+    @Override
+    public void backPropagation() {
+
+    }
+
+    @Override
+    public void updateMiniBatch() {
+
+    }
+
+    @Override
     public void summary() {
 
     }

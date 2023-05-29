@@ -9,21 +9,23 @@ import java.util.Random;
 public class Dense implements Layer {
     private double[][] weights;
     private double[] biases;
-    private double[][] output;
+    private double[] output;
     private ActivationFunction activationFunction;
 
     public Dense(int nInput, int nNeuron, ActivationFunction activationFunction) {
-        initializeWeights(nInput, nNeuron);
+        initializeWeights(nNeuron, nInput);
         this.biases = new double[nNeuron];
+        this.output = new double[nNeuron];
         this.activationFunction = activationFunction;
     }
 
     public Dense(int nNeuron, ActivationFunction activationFunction) {
         this.biases = new double[nNeuron];
+        this.output = new double[nNeuron];
         this.activationFunction = activationFunction;
     }
 
-    private void initializeWeights(int rows, int cols){
+    public void initializeWeights(int rows, int cols) {
         Random random = new Random();
         this.weights = new double[rows][cols];
 
@@ -35,43 +37,33 @@ public class Dense implements Layer {
     }
 
     @Override
-    public void forward(double[][] inputs) {
-        double[][] dotProduct = dotProduct(inputs, this.weights);
-        this.output = add(dotProduct, biases);
-
-        for (int i = 0; i < this.output.length; i++) {
-            this.output[i] = this.activationFunction.activate(this.output[i]);
-        }
+    public void forward(double[] inputs) {
+        double[] dotProduct = dotProduct(inputs, this.weights);
+        double[] output = add(dotProduct, this.biases);
+        this.output = this.activationFunction.activate(output);
     }
 
     @Override
-    public double[][] dotProduct(double[][] a, double[][] b) {
-        double[][] output = new double[a.length][b[0].length];
+    public double[] dotProduct(double[] a, double[][] b) {
+        double[] output = new double[b.length];
 
-        for (int i = 0; i < output.length; i++) {
-            for (int j = 0; j < output[0].length; j++) {
-                double value = 0;
-
-                for (int k = 0; k < a[0].length; k++) {
-                    value += a[i][k] * b[k][j];
-                }
-
-                output[i][j] = value;
+        for (int i = 0; i < b.length; i++) {
+            double sum = 0;
+            for (int j = 0; j < a.length; j++) {
+                sum += a[j] + b[i][j];
             }
+            output[i] = sum;
         }
-
 
         return output;
     }
 
     @Override
-    public double[][] add(double[][] a, double[] b) {
-        double[][] output = new double[a.length][a[0].length];
+    public double[] add(double[] a, double[] b) {
+        double[] output = new double[a.length];
 
-        for (int i = 0; i < output.length; i++) {
-            for (int j = 0; j < output[0].length; j++) {
-                output[i][j] = a[i][j] + b[j];
-            }
+        for (int i = 0; i < a.length; i++) {
+            output[i] = a[i] + b[i];
         }
 
         return output;

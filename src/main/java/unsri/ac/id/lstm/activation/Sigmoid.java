@@ -11,4 +11,15 @@ public class Sigmoid implements ActivationFunction {
 
         return result;
     }
+
+    @Override
+    public double[] derivative(double[] input) {
+        double[] result = activate(input);
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = result[i] * (1 - result[i]);
+        }
+
+        return result;
+    }
 }
