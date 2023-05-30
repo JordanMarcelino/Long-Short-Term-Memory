@@ -8,7 +8,7 @@ import unsri.ac.id.lstm.initialization.InitializationFunction;
 public abstract class Layer<T> {
     protected double[][] weights;
     protected double[] biases;
-    protected ActivationFunction activationFunction;
+    protected ActivationFunction<T> activationFunction;
     protected InitializationFunction initializationFunction;
     protected T output;
 

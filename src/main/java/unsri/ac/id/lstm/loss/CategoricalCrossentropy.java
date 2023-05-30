@@ -1,6 +1,6 @@
 package unsri.ac.id.lstm.loss;
 
-public class CategoricalCrossentropy implements LossFunction<double[][]> {
+public class CategoricalCrossentropy implements LossFunction {
     public double call(double[][] yTrue, double[][] yPred) {
         // TODO: Handle errors
         int nBatch = yTrue.length;
@@ -19,5 +19,10 @@ public class CategoricalCrossentropy implements LossFunction<double[][]> {
         loss /= loss / nBatch;
 
         return loss;
+    }
+
+    @Override
+    public double call(double[] yTrue, double[] yPred) {
+        return 0;
     }
 }

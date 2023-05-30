@@ -22,9 +22,9 @@ public class ModelTest {
     @Test
     void testSequential() {
         Sequential<double[]> sequential = new Sequential<>();
-        sequential.add(new Dense<>(300, 16, new ReLU(), new XavierGlorotInitializer()));
-        sequential.add(new Dense<>(16, new ReLU(), new XavierGlorotInitializer()));
-        sequential.add(new Dense<>(16, new SoftMax(), new XavierGlorotInitializer()));
+        sequential.add(new Dense<>(300, 16, new ReLU<>(), new XavierGlorotInitializer()));
+        sequential.add(new Dense<>(16, new ReLU<>(), new XavierGlorotInitializer()));
+        sequential.add(new Dense<>(16, new SoftMax<>(), new XavierGlorotInitializer()));
 
         for (Layer<double[]> l : sequential.getLayers()) {
             System.out.println(l);

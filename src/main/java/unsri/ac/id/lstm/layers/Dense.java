@@ -11,27 +11,28 @@ import unsri.ac.id.lstm.utils.Utils;
 @Data
 public class Dense<T> extends Layer<T> {
 
-    public Dense(int nInput, int nNeuron, ActivationFunction activationFunction, InitializationFunction initializationFunction) {
+    public Dense(int nInput, int nNeuron,
+                 ActivationFunction<T> activationFunction, InitializationFunction initializationFunction) {
         this.biases = new double[nNeuron];
         this.activationFunction = activationFunction;
         this.initializationFunction = initializationFunction;
         initializeWeights(nNeuron, nInput);
     }
 
-    public Dense(int nInput, int nNeuron, ActivationFunction activationFunction) {
+    public Dense(int nInput, int nNeuron, ActivationFunction<T> activationFunction) {
         this.biases = new double[nNeuron];
         this.activationFunction = activationFunction;
         this.initializationFunction = new RandomInitializer();
         initializeWeights(nNeuron, nInput);
     }
 
-    public Dense(int nNeuron, ActivationFunction activationFunction, InitializationFunction initializationFunction) {
+    public Dense(int nNeuron, ActivationFunction<T> activationFunction, InitializationFunction initializationFunction) {
         this.biases = new double[nNeuron];
         this.activationFunction = activationFunction;
         this.initializationFunction = initializationFunction;
     }
 
-    public Dense(int nNeuron, ActivationFunction activationFunction) {
+    public Dense(int nNeuron, ActivationFunction<T> activationFunction) {
         this.biases = new double[nNeuron];
         this.activationFunction = activationFunction;
         this.initializationFunction = new RandomInitializer();
@@ -46,13 +47,13 @@ public class Dense<T> extends Layer<T> {
         if (inputs instanceof double[]) {
             double[] dotProduct = Utils.dotProduct((double[]) inputs, this.weights);
             double[] output = Utils.add(dotProduct, this.biases);
-            this.output = (T) this.activationFunction.activate(output);
+            this.output = this.activationFunction.activate((T) output);
         } else if (inputs instanceof double[][]) {
             double[][] dotProduct = Utils.dotProduct((double[][]) inputs, this.weights);
             double[][] output = Utils.add(dotProduct, this.biases);
 
             for (int i = 0; i < output.length; i++) {
-                output[i] = this.activationFunction.activate(output[i]);
+                output[i] = (double[]) this.activationFunction.activate((T) output[i]);
             }
 
             this.output = (T) output;

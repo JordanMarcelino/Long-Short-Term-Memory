@@ -13,8 +13,8 @@ import java.util.Random;
 @Slf4j
 public class ActivationFunctionTest {
 
-    private double[] input = new double[10];
-    private Random random = new Random();
+    private final double[] input = new double[10];
+    private final Random random = new Random();
 
     @BeforeEach
     void setUp() {
@@ -31,7 +31,7 @@ public class ActivationFunctionTest {
 
     @Test
     void reluTest() {
-        ActivationFunction relu = new ReLU();
+        ActivationFunction<double[]> relu = new ReLU<>();
         double[] expectedResult = new double[10];
 
         for (int i = 0; i < expectedResult.length; i++) {
@@ -48,7 +48,7 @@ public class ActivationFunctionTest {
 
     @Test
     void sigmoidTest() {
-        ActivationFunction sigmoid = new Sigmoid();
+        ActivationFunction<double[]> sigmoid = new Sigmoid<>();
         double[] expectedResult = new double[10];
 
         for (int i = 0; i < expectedResult.length; i++) {
@@ -65,7 +65,7 @@ public class ActivationFunctionTest {
 
     @Test
     void tanhTest() {
-        ActivationFunction tanH = new TanH();
+        ActivationFunction<double[]> tanH = new TanH<>();
         double[] expectedResult = new double[10];
 
         for (int i = 0; i < expectedResult.length; i++) {
@@ -82,7 +82,7 @@ public class ActivationFunctionTest {
 
     @Test
     void softMaxTest() {
-        ActivationFunction softMax = new SoftMax();
+        ActivationFunction<double[]> softMax = new SoftMax<>();
         double[] expectedResult = new double[10];
 
         for (int i = 0; i < expectedResult.length; i++) {

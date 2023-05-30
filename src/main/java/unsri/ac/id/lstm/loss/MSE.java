@@ -1,6 +1,6 @@
 package unsri.ac.id.lstm.loss;
 
-public class MSE implements LossFunction<double[]>{
+public class MSE implements LossFunction{
     @Override
     public double call(double[] yTrue, double[] yPred) {
         // TODO: Handle errors
@@ -13,4 +13,8 @@ public class MSE implements LossFunction<double[]>{
 
         return sumSquaredErrors / n;
     }
+
+    // public double call(double yTrue, double yPred) {
+    //     return Math.pow(yPred - yTrue, 2);
+    // }
 }

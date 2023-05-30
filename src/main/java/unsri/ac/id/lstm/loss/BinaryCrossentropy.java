@@ -1,6 +1,6 @@
 package unsri.ac.id.lstm.loss;
 
-public class BinaryCrossentropy implements LossFunction<double[]> {
+public class BinaryCrossentropy implements LossFunction {
     @Override
     public double call(double[] yTrue, double[] yPred) {
         // TODO: Handle errors
@@ -18,4 +18,11 @@ public class BinaryCrossentropy implements LossFunction<double[]> {
 
         return loss;
     }
+
+    // public double call(double yTrue, double yPred) {
+    //     double epsilon = 1e-15;
+    //     double clippedPred = Math.max(epsilon, Math.min(1 - epsilon, yPred));
+
+    //     return -yTrue * Math.log(clippedPred) - (1 - yTrue) * Math.log(1 - clippedPred);
+    // }
 }

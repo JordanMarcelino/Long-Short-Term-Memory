@@ -25,7 +25,7 @@ public class LayerTest {
         double[] input = Arrays.stream(dataset.getX()).flatMapToDouble(Arrays::stream).toArray();
         System.out.println(Arrays.toString(input));
 
-        Dense<double[]> dense = new Dense<>(input.length, 4, new SoftMax());
+        Dense<double[]> dense = new Dense<>(input.length, 4, new SoftMax<>());
 
         dense.forward(input);
 
