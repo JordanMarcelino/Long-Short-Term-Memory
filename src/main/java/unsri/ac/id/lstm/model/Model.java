@@ -1,19 +1,25 @@
 package unsri.ac.id.lstm.model;
 
+import lombok.Data;
 import unsri.ac.id.lstm.layers.Layer;
 
-public interface Model {
-    void add(Layer... layers);
+import java.util.List;
 
-    void forward();
+@Data
+public abstract class Model<T> {
+    protected List<Layer<T>> layers;
 
-    void backPropagation();
+    public abstract void add(Layer<T> layer);
 
-    void updateMiniBatch();
+    public abstract void forward(T input);
 
-    void summary();
+    public abstract void backPropagation();
 
-    void compile();
+    public abstract void updateMiniBatch();
 
-    void fit(double[][] xTrain, double[] yTrain, int batchSize, int epochs, double validationSplit);
+    public abstract void summary();
+
+    public abstract void compile();
+
+    public abstract void fit(double[][] xTrain, double[] yTrain, int batchSize, int epochs, double validationSplit);
 }
