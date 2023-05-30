@@ -1,9 +1,16 @@
 package unsri.ac.id.lstm.layers;
 
-public interface Layer {
-    void forward(double[] inputs);
+import lombok.Data;
+import unsri.ac.id.lstm.activation.ActivationFunction;
+import unsri.ac.id.lstm.initialization.InitializationFunction;
 
-    double[] dotProduct(double[] a, double[][] b);
+@Data
+public abstract class Layer<T> {
+    protected double[][] weights;
+    protected double[] biases;
+    protected ActivationFunction activationFunction;
+    protected InitializationFunction initializationFunction;
+    protected T output;
 
-    double[] add(double[] a, double[] b);
+    public abstract void forward(T inputs);
 }
