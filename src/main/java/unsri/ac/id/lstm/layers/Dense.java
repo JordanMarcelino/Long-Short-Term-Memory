@@ -47,16 +47,21 @@ public class Dense<T> extends Layer<T> {
         if (inputs instanceof double[]) {
             double[] dotProduct = Utils.dotProduct((double[]) inputs, this.weights);
             double[] output = Utils.add(dotProduct, this.biases);
-            this.output = this.activationFunction.activate((T) output);
+            
+            this.outputBeforeActivation = (T) output;
+
+            this.outputAfterActivation = (T) this.activationFunction.activate(this.outputAfterActivation);
         } else if (inputs instanceof double[][]) {
             double[][] dotProduct = Utils.dotProduct((double[][]) inputs, this.weights);
             double[][] output = Utils.add(dotProduct, this.biases);
+
+            this.outputBeforeActivation = (T) output;
 
             for (int i = 0; i < output.length; i++) {
                 output[i] = (double[]) this.activationFunction.activate((T) output[i]);
             }
 
-            this.output = (T) output;
+            this.outputAfterActivation = (T) output;
         }
     }
 

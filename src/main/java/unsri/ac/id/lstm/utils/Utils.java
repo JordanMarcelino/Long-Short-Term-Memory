@@ -2,6 +2,16 @@ package unsri.ac.id.lstm.utils;
 
 public class Utils {
 
+    public static double[] multiplyElementWise(double[] a, double[] b) {
+        double[] output = new double[a.length];
+
+        for(int i = 0; i < a.length; i++) {
+            output[i] = a[i] * b[i];
+        }
+
+        return output;
+    }
+
     public static double[] dotProduct(double[] a, double[][] b) {
         double[] output = new double[b.length];
 

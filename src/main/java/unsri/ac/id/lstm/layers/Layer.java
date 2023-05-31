@@ -10,7 +10,8 @@ public abstract class Layer<T> {
     protected double[] biases;
     protected ActivationFunction<T> activationFunction;
     protected InitializationFunction initializationFunction;
-    protected T output;
+    protected T outputBeforeActivation;
+    protected T outputAfterActivation;
 
     public abstract void forward(T inputs);
 }

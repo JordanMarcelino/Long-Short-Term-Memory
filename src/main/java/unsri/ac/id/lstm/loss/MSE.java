@@ -14,7 +14,14 @@ public class MSE implements LossFunction{
         return sumSquaredErrors / n;
     }
 
-    // public double call(double yTrue, double yPred) {
-    //     return Math.pow(yPred - yTrue, 2);
-    // }
+    public double[] derivative(double[] yTrue, double[] yPred) {
+        int n = yTrue.length;
+        double[] derivative = new double[n];
+
+        for (int i = 0; i < n; i++) {
+            derivative[i] = 2 * (yPred[i] - yTrue[i]) / n;
+        }
+    
+        return derivative;
+    }
 }
