@@ -29,7 +29,7 @@ public class LayerTest {
 
         dense.forward(input);
 
-        System.out.println(Arrays.toString(dense.getOutput()));
-        System.out.println(Arrays.stream(dense.getOutput()).sum());
+        System.out.println(Arrays.toString(dense.getOutputAfterActivation()));
+        System.out.println(Arrays.stream(dense.getOutputAfterActivation()).sum());
     }
 }

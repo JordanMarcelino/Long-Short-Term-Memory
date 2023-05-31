@@ -3,6 +3,7 @@ package unsri.ac.id.lstm.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import unsri.ac.id.lstm.layers.Layer;
+import unsri.ac.id.lstm.utils.*;
 
 import java.util.ArrayList;
 
@@ -28,13 +29,20 @@ public class Sequential<T> extends Model<T> {
                 Layer<T> prevLayer = this.layers.get(i - 1);
                 Layer<T> currentLayer = this.layers.get(i);
 
-                currentLayer.forward(prevLayer.getOutput());
+                currentLayer.forward(prevLayer.getOutputAfterActivation());
             }
         }
     }
 
     @Override
-    public void backPropagation() {
+    public void backPropagation(double[] x, double[] y) {
+        double[] delta = Utils.multiplyElementWise(
+            getLossFunction().derivative((double[]) layers.get(layers.size() - 1).getOutputAfterActivation(), y),
+            (double[]) layers.get(layers.size() - 1).getActivationFunction().derivative(layers.get(layers.size() - 1).getOutputBeforeActivation())
+        );
+
+        
+
 
     }
 

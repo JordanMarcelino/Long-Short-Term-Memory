@@ -19,10 +19,14 @@ public class BinaryCrossentropy implements LossFunction {
         return loss;
     }
 
-    // public double call(double yTrue, double yPred) {
-    //     double epsilon = 1e-15;
-    //     double clippedPred = Math.max(epsilon, Math.min(1 - epsilon, yPred));
-
-    //     return -yTrue * Math.log(clippedPred) - (1 - yTrue) * Math.log(1 - clippedPred);
-    // }
+    public double[] derivative(double[] yTrue, double[] yPred) {
+        int n = yTrue.length;
+        double[] derivative = new double[n];
+    
+        for (int i = 0; i < n; i++) {
+            derivative[i] = (yPred[i] - yTrue[i]) / (yPred[i] * (1 - yPred[i]));
+        }
+    
+        return derivative;
+    }
 }
