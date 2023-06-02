@@ -5,7 +5,7 @@ public class Utils {
     public static double[] multiplyElementWise(double[] a, double[] b) {
         double[] output = new double[a.length];
 
-        for(int i = 0; i < a.length; i++) {
+        for (int i = 0; i < a.length; i++) {
             output[i] = a[i] * b[i];
         }
 
@@ -66,7 +66,53 @@ public class Utils {
         return output;
     }
 
-    public static double[][] transpose(double[][] input){
+    public static double[][] add(double[][] a, double[][] b) {
+        double[][] output = new double[a.length][a[0].length];
+
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[0].length; j++) {
+                output[i][j] = a[i][j] + b[i][j];
+            }
+        }
+
+        return output;
+    }
+
+    public static double[] subtract(double[] a, double[] b) {
+        double[] output = new double[a.length];
+
+        for (int i = 0; i < a.length; i++) {
+            output[i] = a[i] - b[i];
+        }
+
+        return output;
+    }
+
+    public static double[][] subtract(double[][] a, double[] b) {
+        double[][] output = new double[a.length][a[0].length];
+
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[0].length; j++) {
+                output[i][j] = a[i][j] - b[j];
+            }
+        }
+
+        return output;
+    }
+
+    public static double[][] subtract(double[][] a, double[][] b) {
+        double[][] output = new double[a.length][a[0].length];
+
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[0].length; j++) {
+                output[i][j] = a[i][j] - b[i][j];
+            }
+        }
+
+        return output;
+    }
+
+    public static double[][] transpose(double[][] input) {
         double[][] output = new double[input[0].length][input.length];
 
         for (int i = 0; i < input.length; i++) {
@@ -76,5 +122,17 @@ public class Utils {
         }
 
         return output;
+    }
+
+    public static double[][] transpose(double[] input) {
+        double[][] output = new double[1][input.length];
+
+        System.arraycopy(input, 0, output[0], 0, input.length);
+
+        return output;
+    }
+
+    public static double[][] transpose(double input) {
+        return new double[][]{{input}};
     }
 }

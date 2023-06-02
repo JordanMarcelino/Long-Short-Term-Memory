@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import unsri.ac.id.lstm.activation.ActivationFunction;
 import unsri.ac.id.lstm.initialization.InitializationFunction;
-import unsri.ac.id.lstm.initialization.RandomInitializer;
+import unsri.ac.id.lstm.initialization.XavierGlorotInitializer;
 import unsri.ac.id.lstm.utils.Utils;
 
 @EqualsAndHashCode(callSuper = true)
@@ -22,7 +22,7 @@ public class Dense<T> extends Layer<T> {
     public Dense(int nInput, int nNeuron, ActivationFunction<T> activationFunction) {
         this.biases = new double[nNeuron];
         this.activationFunction = activationFunction;
-        this.initializationFunction = new RandomInitializer();
+        this.initializationFunction = new XavierGlorotInitializer();
         initializeWeights(nNeuron, nInput);
     }
 
@@ -35,7 +35,7 @@ public class Dense<T> extends Layer<T> {
     public Dense(int nNeuron, ActivationFunction<T> activationFunction) {
         this.biases = new double[nNeuron];
         this.activationFunction = activationFunction;
-        this.initializationFunction = new RandomInitializer();
+        this.initializationFunction = new XavierGlorotInitializer();
     }
 
     public void initializeWeights(int rows, int cols) {
@@ -47,10 +47,11 @@ public class Dense<T> extends Layer<T> {
         if (inputs instanceof double[]) {
             double[] dotProduct = Utils.dotProduct((double[]) inputs, this.weights);
             double[] output = Utils.add(dotProduct, this.biases);
-            
+
             this.outputBeforeActivation = (T) output;
 
-            this.outputAfterActivation = (T) this.activationFunction.activate(this.outputAfterActivation);
+            this.outputAfterActivation = (T) this.activationFunction.activate((T) output);
+
         } else if (inputs instanceof double[][]) {
             double[][] dotProduct = Utils.dotProduct((double[][]) inputs, this.weights);
             double[][] output = Utils.add(dotProduct, this.biases);

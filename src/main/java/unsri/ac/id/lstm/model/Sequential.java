@@ -3,7 +3,7 @@ package unsri.ac.id.lstm.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import unsri.ac.id.lstm.layers.Layer;
-import unsri.ac.id.lstm.utils.*;
+import unsri.ac.id.lstm.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,13 @@ public class Sequential<T> extends Model<T> {
             } else {
                 Layer<T> prevLayer = this.layers.get(i - 1);
                 Layer<T> currentLayer = this.layers.get(i);
+                double[] prevOutputLen = (double[]) prevLayer.getOutputBeforeActivation();
 
+                currentLayer.setWeights(
+                        currentLayer.getInitializationFunction().initialize(
+                                currentLayer.getBiases().length,
+                                prevOutputLen.length)
+                );
                 currentLayer.forward(prevLayer.getOutputAfterActivation());
             }
         }
@@ -37,11 +43,9 @@ public class Sequential<T> extends Model<T> {
     @Override
     public void backPropagation(double[] x, double[] y) {
         double[] delta = Utils.multiplyElementWise(
-            getLossFunction().derivative((double[]) layers.get(layers.size() - 1).getOutputAfterActivation(), y),
-            (double[]) layers.get(layers.size() - 1).getActivationFunction().derivative(layers.get(layers.size() - 1).getOutputBeforeActivation())
+                getLossFunction().derivative((double[]) layers.get(layers.size() - 1).getOutputAfterActivation(), y),
+                (double[]) layers.get(layers.size() - 1).getActivationFunction().derivative(layers.get(layers.size() - 1).getOutputBeforeActivation())
         );
-
-        
 
 
     }
