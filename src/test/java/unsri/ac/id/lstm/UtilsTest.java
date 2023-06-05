@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import unsri.ac.id.lstm.utils.Utils;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class UtilsTest {
 
@@ -19,5 +20,20 @@ public class UtilsTest {
         double input = 2.9;
 
         System.out.println(Arrays.deepToString(Utils.transpose(input)));
+    }
+
+    @Test
+    void testEditArray() {
+        double[][] input = {
+                {1,1,1},
+                {1,1,1}
+        };
+
+        editArray(input);
+        System.out.println(Arrays.deepToString(input));
+    }
+
+    void editArray(double[][] input){
+        input = Utils.multiply(input, 2);
     }
 }
